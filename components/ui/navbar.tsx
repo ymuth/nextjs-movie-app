@@ -5,7 +5,7 @@ export default function NavBar() {
         <nav className="flex justify-between align-center py-2 px-4 border-b-2">
 
             <div>
-                <Link href={"/"}>Movie App</Link>
+                <Link href={"/"}>Mugz Movies</Link>
             </div>
 
             <div className="flex gap-4">
