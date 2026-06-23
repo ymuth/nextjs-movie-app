@@ -1,7 +1,7 @@
 import {getMovies} from "@/lib/api/movie"
 import MovieGrid from "@/components/movies/moviegrid"
 import Image from "next/image";
-import hero from "@/public/images/movies/hero.jpg"
+import hero from "@/public/images/movies/hero.jpeg"
 
 
 export default async function MoviePage() {
