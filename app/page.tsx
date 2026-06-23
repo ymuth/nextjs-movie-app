@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
 
-      <div className="absolute bg-fixed inset-0 z-0  bg-cover bg-center bg-[url(/images/hero.jpg)]" />
+      <div className="absolute bg-fixed inset-0 z-0  bg-cover bg-center bg-[url(/images/home/hero.jpg)]" />
       <div className="z-0 absolute inset-0 bg-gradient-to-b from-transparent to-[#1e1e1e]" />
 
       <div className="relative z-10">
