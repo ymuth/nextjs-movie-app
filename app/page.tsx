@@ -1,11 +1,23 @@
 import { bebasNeue } from "@/lib/fonts"
+import Image from "next/image";
+import hero from "@/public/images/home/hero.jpg"
 
 export default function Home() {
   return (
     <div>
 
-      <div className="absolute bg-fixed inset-0 z-0  bg-cover bg-center bg-[url(/images/home/hero.jpg)]" />
-      <div className="z-0 absolute inset-0 bg-gradient-to-b from-transparent to-[#1e1e1e]" />
+      <div className="fixed inset-0 z-0">
+        <Image
+          src={hero}
+          alt="background"
+          fill
+          priority
+          placeholder="blur"
+          className="object-cover"
+        />
+      </div>
+      <div className="z-0 fixed absolute inset-0 bg-gradient-to-b from-transparent to-[#1e1e1e]" />
+
 
       <div className="relative z-10">
         <div className="flex flex-col text-center justify-center m-5 p-5" >
