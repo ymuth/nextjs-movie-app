@@ -15,7 +15,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
 
             </div>
 
-            <div className=" text-center p-2 bg-[#373737]">
+            <div className=" text-center p-2 bg-[#373737] min-h-24">
                 <h3 className="font-semibold">{movie.title}</h3>
                 <p className="italic text-gray-400">{movie.release_date.split("-")[0]}</p>
             </div>

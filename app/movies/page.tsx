@@ -1,11 +1,11 @@
-import {getMovies} from "@/lib/api/movie"
+import {getPopularMovies} from "@/lib/api/movie"
 import MovieGrid from "@/components/movies/moviegrid"
 import Image from "next/image";
 import hero from "@/public/images/movies/hero.jpeg"
 
 
 export default async function MoviePage() {
-    const data = await getMovies();
+    const data = await getPopularMovies();
 
 
     return (

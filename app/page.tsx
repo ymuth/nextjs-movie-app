@@ -1,10 +1,15 @@
 import { bebasNeue } from "@/lib/fonts"
 import Image from "next/image";
 import hero from "@/public/images/home/hero.jpg"
+import MovieRow from "@/components/movies/movierow";
+import { getTrendingMovies } from "@/lib/api/movie";
 
-export default function Home() {
+export default async function Home() {
+  const data = await getTrendingMovies();
   return (
     <div>
+
+      {/* background and fade */}
 
       <div className="fixed inset-0 z-0">
         <Image
@@ -18,7 +23,7 @@ export default function Home() {
       </div>
       <div className="z-0 fixed absolute inset-0 bg-gradient-to-b from-transparent to-[#1e1e1e]" />
 
-
+      {/* Title and desc */}
       <div className="relative z-10">
         <div className="flex flex-col text-center justify-center m-5 p-5" >
 
@@ -30,9 +35,7 @@ export default function Home() {
 
         <div className="m-5">
 
-          <h3 className="font-semibold underline">Trending Movies.</h3>
-          <span></span>
-          {/*TODO: movie cards added here */}
+          <MovieRow title="Trending Movies" movies={data.results}/>
         </div>
       </div>
 
