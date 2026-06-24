@@ -8,6 +8,24 @@ type Props = {
 
 export default function MovieRow({ title, movies }: Props) {
 
+    let subdirectory;
+    switch (title) {
+        case "Trending":
+            subdirectory = "/trending";
+            break;
+
+        case "Currently in theatres":
+            subdirectory = "/playing";
+            break;
+
+        case "Top":
+            subdirectory = "/top";
+            break;
+        
+        default:
+            subdirectory = ""
+    }
+
     return (
         <div className="mb-10">
 
@@ -16,7 +34,7 @@ export default function MovieRow({ title, movies }: Props) {
                 <h3 className="font-bold p-1">{title}</h3>
 
                 <a
-                    href="/movies"
+                    href={`/movies${subdirectory}`}
                     className="p-1 px-2 border-2 border-[#575757] rounded-3xl bg-gray-800/50 no-underline hover:underline hover:shadow-sm shadow-white"
                 >
                     Explore more
@@ -28,7 +46,7 @@ export default function MovieRow({ title, movies }: Props) {
                 {
                     movies.map((movie) => (
                         <div key={movie.id} className="min-w-40 ">
-                            <MovieCard movie={movie}/>
+                            <MovieCard movie={movie} />
                         </div>))
                 }
             </div>
