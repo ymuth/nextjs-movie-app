@@ -2,10 +2,12 @@ import { bebasNeue } from "@/lib/fonts"
 import Image from "next/image";
 import hero from "@/public/images/home/hero.jpg"
 import MovieRow from "@/components/movies/movierow";
-import { getTrendingMovies } from "@/lib/api/movie";
+import { getTrendingMovies, getPlayingMovies, getTopMovies } from "@/lib/api/movie";
 
 export default async function Home() {
-  const data = await getTrendingMovies();
+  const trendingMovies = await getTrendingMovies();
+  const playingMovies = await getPlayingMovies();
+  const topMovies = await getTopMovies();
   return (
     <div>
 
@@ -32,11 +34,13 @@ export default async function Home() {
           <p className="">Where we bring the best movie recommendations straight to <strong className="underline">you!</strong></p>
 
         </div>
+      </div>
 
-        <div className="m-5">
-
-          <MovieRow title="Trending Movies" movies={data.results}/>
-        </div>
+      {/* Movie Rows  */}
+      <div className="m-5 relative z-10">
+        <MovieRow title="Trending" movies={trendingMovies.results} />
+        <MovieRow title="Currently in theatres" movies={playingMovies.results} />
+        <MovieRow title="Top" movies={topMovies.results} />
       </div>
 
     </div>
