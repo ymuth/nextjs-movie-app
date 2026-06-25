@@ -5,6 +5,18 @@ const apiKey = process.env.TMDB_API_KEY;
 // const movieDetailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
 
 
+export async function getMovieId(id: string) {
+    const movieDetailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
+    const res = await fetch(movieDetailsURL);
+
+    console.log("URL:", movieDetailsURL);
+    console.log("Status:", res.status);
+
+    if (!res.ok) throw new Error("Failed to fetch Movies");
+
+    return res.json();
+}
+
 export async function getPopularMovies() {
     const popularMoviesURL = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
     const res = await fetch(popularMoviesURL)
