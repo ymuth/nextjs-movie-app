@@ -1,4 +1,4 @@
-import { getPopularMovies, getTrendingMovies, getTopMovies, getPlayingMovies } from "@/lib/api/movie"
+import { getPopularMovies, getTrendingMovies, getTopMovies, getAiringMovies } from "@/lib/api/movie"
 import MovieGrid from "@/components/movies/moviegrid"
 import Image from "next/image";
 import hero from "@/public/images/movies/hero.jpeg"
@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 export default async function MoviePage({ params }: { params: { category: string } }) {
     const { category } = await params;
 
-    const validCategories = ["popular", "trending", "top", "playing"] as const;
+    const validCategories = ["popular", "trending", "top", "airing"] as const;
     if (!validCategories.includes(category as any)) {
         redirect("/movies/popular");
     }
@@ -28,9 +28,9 @@ export default async function MoviePage({ params }: { params: { category: string
             title = "Top Movies"
             break;
 
-        case "playing":
-            data = await getPlayingMovies();
-            title = "Movies currently in theatre"
+        case "airing":
+            data = await getAiringMovies();
+            title = "Movies currently airing"
             break;
 
         default:

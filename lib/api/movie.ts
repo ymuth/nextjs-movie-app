@@ -41,9 +41,9 @@ export async function getTopMovies() {
     return res.json();
 }
 
-export async function getPlayingMovies() {
-    const nowPlayingMoviesURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`
-    const res = await fetch(nowPlayingMoviesURL)
+export async function getAiringMovies() {
+    const airingMoviesURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`
+    const res = await fetch(airingMoviesURL)
 
     if (!res.ok) throw new Error("Failed the fetch Movies");
 

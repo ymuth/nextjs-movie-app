@@ -15,7 +15,7 @@ export default function MovieRow({ title, movies }: Props) {
             break;
 
         case "Currently in theatres":
-            subdirectory = "/playing";
+            subdirectory = "/airing";
             break;
 
         case "Top":
