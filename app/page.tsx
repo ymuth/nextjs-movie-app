@@ -38,9 +38,9 @@ export default async function Home() {
 
       {/* Movie Rows  */}
       <div className="m-5 relative z-10">
-        <MovieRow title="Trending" movies={trendingMovies.results} />
-        <MovieRow title="Currently in theatres" movies={airingMovies.results} />
-        <MovieRow title="Top" movies={topMovies.results} />
+        <MovieRow title="Trending" movies={trendingMovies.results} showExploreMore={true} />
+        <MovieRow title="Currently in theatres" movies={airingMovies.results} showExploreMore={true} />
+        <MovieRow title="Top" movies={topMovies.results} showExploreMore={true} />
       </div>
 
     </div>

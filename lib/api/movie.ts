@@ -2,15 +2,23 @@
 const apiKey = process.env.TMDB_API_KEY;
 // const searchMoviesURL = `https://api.themoviedb.org/3/movie?api_key=${apiKey}&query=${query}`;
 // const similarMoviesURL = `https://api.themoviedb.org/3/movie/${movie_id}/similar`
-// const movieDetailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
 
 
-export async function getMovieId(id: string) {
-    const movieDetailsURL = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
+
+export async function getSimilarMovies(movie_id: string) {
+    const similarMoviesURL = `https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=${apiKey}`
+    const res = await fetch(similarMoviesURL)
+
+    if (!res.ok) throw new Error("Failed to fetch Movies");
+
+    return res.json();
+
+}
+
+
+export async function getMovieId(movie_id: string) {
+    const movieDetailsURL = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${apiKey}`
     const res = await fetch(movieDetailsURL);
-
-    console.log("URL:", movieDetailsURL);
-    console.log("Status:", res.status);
 
     if (!res.ok) throw new Error("Failed to fetch Movies");
 
@@ -35,14 +43,14 @@ export async function getTrendingMovies() {
     return res.json();
 }
 
-export async function getUpcomingMovies() {
-    const upcomingMoviesURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}`
-    const res = await fetch(upcomingMoviesURL)
+// export async function getUpcomingMovies() {
+//     const upcomingMoviesURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}`
+//     const res = await fetch(upcomingMoviesURL)
 
-    if (!res.ok) throw new Error("Failed to fetch Movies");
+//     if (!res.ok) throw new Error("Failed to fetch Movies");
 
-    return res.json();
-}
+//     return res.json();
+// }
 
 export async function getTopMovies() {
     const topMoviesURL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`
