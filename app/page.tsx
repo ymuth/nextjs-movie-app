@@ -11,7 +11,7 @@ export default async function Home() {
   return (
     <div>
 
-      {/* background and fade */}
+      {/* background and tint */}
 
       <div className="fixed inset-0 z-0">
         <Image

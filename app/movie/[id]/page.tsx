@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     return {
         title: movie.title,
         description: movie.overview,
-        keywords: genreList,
+        keywords: `${genreList}, ${movie.title}`,
 
     };
 }
@@ -34,6 +34,8 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
         notFound();
     }
 
+    const similarMovies = await getSimilarMovies(id);
+
     const moviePosterPath = movie.poster_path
         ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
         : null
@@ -42,7 +44,6 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
         ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
         : null;
 
-    const similarMovies = await getSimilarMovies(id);
 
 
 
@@ -51,7 +52,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
         <div>
 
             {/* Background backdrop */}
-            <div className="fixed z-0 inset-0 blur-md animate-fadeIn">
+            <div className="fixed z-0 inset-0 blur-sm animate-fadeIn">
                 {movieBackdropPath && (
                     <Backdrop backdrop_path={movieBackdropPath} />
 
@@ -61,29 +62,31 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
             {/* contents: title, image, description */}
             <div className="grid grid-cols-4 justify-items-center p-5 gap-8 mb-10">
 
-                <div className="w-full text-center  col-span-4  relative z-10 m-5">
+                <div className=" text-center  col-span-4  relative z-10 p-3 pb-0 mb-2 bg-black/50 rounded-md">
                     <h1 className="text-5xl font-semibold">{movie.title}</h1>
                     <h4 className="text-xl">{movie.release_date.split('-')[0]}</h4>
                 </div>
 
                 <div className="relative w-full  max-w-[220px] aspect-[2/3] size-full ">
-                {moviePosterPath &&
-                    <Image
-                        fill
-                        src={moviePosterPath}
-                        alt={movie.title}
-                        loading="eager"
-                        sizes="(max-width: 768px) 100vw, 25vw"
-                        className="object-cover rounded-xl shadow-gray-700 shadow-md"
-                    />
+                    {moviePosterPath &&
+                        <Image
+                            fill
+                            src={moviePosterPath}
+                            alt={movie.title}
+                            loading="eager"
+                            sizes="(max-width: 768px) 100vw, 25vw"
+                            className="object-cover rounded-xl shadow-gray-700 shadow-md"
+                        />
                     }
                 </div>
 
                 <div className="flex flex-col col-span-3 relative z-10 bg-black/50 rounded-xl shadow-gray-700 shadow-md size-full p-5 mr-10">
 
                     {/* <div> */}
-                    <h3 className="italic  text-center">{movie.tagline}</h3>
-                    <h3 className="font-semibold my-3">{movie.overview}</h3>
+                    {movie.tagline && 
+                    <h3 className="italic  text-center mb-3">{movie.tagline}</h3>
+                    }
+                    <h3 className="font-semibold">{movie.overview}</h3>
                     {/* </div> */}
 
                     <ul className="mt-auto">
@@ -99,8 +102,12 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
             </div>
 
             {/* recommendations */}
-            <div className="relative z-10 p-10 border-t-1 border-gray-400/50">
-                <MovieRow title="Similar" movies={similarMovies.results} />
+            <div>
+                {similarMovies?.results.length > 0 &&
+                    <div className="relative z-10 p-10 border-t-1 border-gray-400/50">
+                        <MovieRow title="Similar" movies={similarMovies.results} />
+                    </div>
+                }
             </div>
 
         </div >

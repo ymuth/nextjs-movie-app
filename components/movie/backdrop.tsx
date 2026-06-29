@@ -17,7 +17,7 @@ export default function Backdrop({ backdrop_path }: Props) {
             fill
             priority
             sizes="100vw"
-            onLoadingComplete={() => setLoaded(true)}
+            onLoad={() => setLoaded(true)}
             className={`object-cover transition-opacity duration-700 ${loaded ? "opacity-100" : "opacity-0"
                 }`}
         />
