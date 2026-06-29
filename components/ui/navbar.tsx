@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { Bebas_Neue } from "next/font/google";
 import { bebasNeue } from "@/lib/fonts";
+import SearchBar from "../searchbar/searchbar";
 
 export default function NavBar() {
     return (
@@ -11,6 +11,7 @@ export default function NavBar() {
             </div>
 
             <div className="flex gap-4">
+                <SearchBar/>
                 <Link href={"/movies"}>Movies</Link>
                 <Link href={"/favourites"}>Favourites</Link>
                 <Link href={"/about"}>About</Link>
