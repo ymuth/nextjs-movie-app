@@ -1,13 +1,22 @@
 
 const apiKey = process.env.TMDB_API_KEY;
 // const searchMoviesURL = `https://api.themoviedb.org/3/movie?api_key=${apiKey}&query=${query}`;
-// const similarMoviesURL = `https://api.themoviedb.org/3/movie/${movie_id}/similar`
+
+
+export async function getSearchMovies(query: string) {
+    const searchMoviesURL = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${encodeURIComponent(query)}`;
+    const res = await fetch(searchMoviesURL);
+
+    if (!res.ok) throw new Error("Failed to fetch Movies");
+
+    return res.json();
+}
 
 
 
 export async function getSimilarMovies(movie_id: string) {
     const similarMoviesURL = `https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=${apiKey}`
-    const res = await fetch(similarMoviesURL)
+    const res = await fetch(similarMoviesURL);
 
     if (!res.ok) throw new Error("Failed to fetch Movies");
 
@@ -27,7 +36,7 @@ export async function getMovieId(movie_id: string) {
 
 export async function getPopularMovies() {
     const popularMoviesURL = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}`
-    const res = await fetch(popularMoviesURL)
+    const res = await fetch(popularMoviesURL);
 
     if (!res.ok) throw new Error("Failed to fetch Movies");
 
@@ -36,7 +45,7 @@ export async function getPopularMovies() {
 
 export async function getTrendingMovies() {
     const trendingWeeklyURL = `https://api.themoviedb.org/3/trending/movie/week?api_key=${apiKey}`
-    const res = await fetch(trendingWeeklyURL)
+    const res = await fetch(trendingWeeklyURL);
 
     if (!res.ok) throw new Error("Failed to fetch Movies");
 
@@ -54,7 +63,7 @@ export async function getTrendingMovies() {
 
 export async function getTopMovies() {
     const topMoviesURL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}`
-    const res = await fetch(topMoviesURL)
+    const res = await fetch(topMoviesURL);
 
     if (!res.ok) throw new Error("Failed to fetch Movies");
 
@@ -63,7 +72,7 @@ export async function getTopMovies() {
 
 export async function getAiringMovies() {
     const airingMoviesURL = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}`
-    const res = await fetch(airingMoviesURL)
+    const res = await fetch(airingMoviesURL);
 
     if (!res.ok) throw new Error("Failed the fetch Movies");
 

@@ -4,7 +4,7 @@ import { bebasNeue } from "@/lib/fonts";
 
 export default function NavBar() {
     return (
-        <nav className="bg-[#161616] relative z-20 flex justify-between align-center py-2 px-4 border-b-2">
+        <nav className="bg-[#161616] relative z-20 flex justify-between align-middle py-2 px-4 border-b-2">
 
             <div className={`${bebasNeue.className} text-xl`}>
                 <Link href={"/"}>Mugz Movies</Link>
