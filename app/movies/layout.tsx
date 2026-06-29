@@ -12,7 +12,7 @@ const categories = ["popular", "trending", "top", "airing"];
 export default function RootLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
   return (
     <div>
-      <div className="relative z-10 flex items-center justify-left mb-3 border-black border-1 p-1 bg-[#1e1e1e] border-b-white">
+      <div className="relative z-10 flex items-center justify-left mb-3 border-black border p-1 bg-[#1e1e1e] border-b-white">
         <h3 className="font-bold p-1">Sort by:</h3>
 
         {categories.map((category) => (

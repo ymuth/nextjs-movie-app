@@ -67,7 +67,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                     <h4 className="text-xl">{movie.release_date.split('-')[0]}</h4>
                 </div>
 
-                <div className="relative w-full  max-w-[220px] aspect-[2/3] size-full ">
+                <div className="relative w-full max-w-55 aspect-2/3 size-full ">
                     {moviePosterPath &&
                         <Image
                             fill
@@ -104,7 +104,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
             {/* recommendations */}
             <div>
                 {similarMovies?.results.length > 0 &&
-                    <div className="relative z-10 p-10 border-t-1 border-gray-400/50">
+                    <div className="relative z-10 p-10 border-t border-gray-400/50">
                         <MovieRow title="Similar" movies={similarMovies.results} />
                     </div>
                 }

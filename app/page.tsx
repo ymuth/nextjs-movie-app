@@ -23,13 +23,13 @@ export default async function Home() {
           className="object-cover"
         />
       </div>
-      <div className="z-0 fixed absolute inset-0 bg-gradient-to-b from-transparent to-[#1e1e1e]" />
+      <div className="z-0 fixed inset-0 bg-linear-to-b from-transparent to-[#1e1e1e]" />
 
       {/* Title and desc */}
       <div className="relative z-10">
         <div className="flex flex-col text-center justify-center m-5 p-5" >
 
-          <h1 className={`text-9xl font-semibold border-b-1 ${bebasNeue.className}`}>MUGZ Movies</h1>
+          <h1 className={`text-9xl font-semibold border-b ${bebasNeue.className}`}>MUGZ Movies</h1>
           <p className="mt-5 text-xl">Welcome to <strong>MUGZ Movies</strong>.</p>
           <p className="">Where we bring the best movie recommendations straight to <strong className="underline">you!</strong></p>
 
