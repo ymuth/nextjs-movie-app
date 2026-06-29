@@ -2,24 +2,46 @@ import { getMovieId, getSimilarMovies } from "@/lib/api/movie";
 import { notFound } from "next/navigation";
 import MovieRow from "@/components/movies/movierow";
 import Image from "next/image";
+import Backdrop from "@/components/movie/backdrop";
+
+type Genre = {
+    name: string;
+}
+
+
+export async function generateMetadata({ params }: { params: { id: string } }) {
+    const { id } = await params;
+    const movie = await getMovieId(id);
+    const genreList = (movie.genres ?? []).map((genre: Genre) => genre.name).join(", ")
+    return {
+        title: movie.title,
+        description: movie.overview,
+        keywords: genreList,
+
+    };
+}
 
 
 
 
 export default async function MovieIdPage({ params }: { params: { id: string } }) {
+
     const { id } = await params;
     let movie;
-
     try {
         movie = await getMovieId(id);
     } catch (err) {
         notFound();
     }
 
+    const moviePosterPath = movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : null
 
+    const movieBackdropPath = movie.backdrop_path
+        ? `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
+        : null;
 
-    const moviePosterPath = `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    const movieBackdropPath = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`
     const similarMovies = await getSimilarMovies(id);
 
 
@@ -29,15 +51,11 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
         <div>
 
             {/* Background backdrop */}
-            <div className="fixed z-0 inset-0 blur-md">
-                <Image
-                    src={movieBackdropPath}
-                    alt="background"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    fill
-                    priority
-                    className="object-cover "
-                />
+            <div className="fixed z-0 inset-0 blur-md animate-fadeIn">
+                {movieBackdropPath && (
+                    <Backdrop backdrop_path={movieBackdropPath} />
+
+                )}
             </div>
 
             {/* contents: title, image, description */}
@@ -49,6 +67,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                 </div>
 
                 <div className="relative w-full  max-w-[220px] aspect-[2/3] size-full ">
+                {moviePosterPath &&
                     <Image
                         fill
                         src={moviePosterPath}
@@ -57,13 +76,14 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                         sizes="(max-width: 768px) 100vw, 25vw"
                         className="object-cover rounded-xl shadow-gray-700 shadow-md"
                     />
+                    }
                 </div>
 
                 <div className="flex flex-col col-span-3 relative z-10 bg-black/50 rounded-xl shadow-gray-700 shadow-md size-full p-5 mr-10">
 
                     {/* <div> */}
-                        <h3 className="italic  text-center">{movie.tagline}</h3>
-                        <h3 className="font-semibold my-3">{movie.overview}</h3>
+                    <h3 className="italic  text-center">{movie.tagline}</h3>
+                    <h3 className="font-semibold my-3">{movie.overview}</h3>
                     {/* </div> */}
 
                     <ul className="mt-auto">
@@ -71,7 +91,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                         <li>Runtime — {movie.runtime} minutes</li>
                         <li>Origin Country — {movie.origin_country}</li>
                         <li>Release Date — {movie.release_date}</li>
-                        <li>Genres — {movie.genres.map((genre: { name: string; }) => genre.name).join(", ")}</li>
+                        <li>Genres — {movie.genres?.map((genre: Genre) => genre.name).join(", ")}</li>
                     </ul>
 
                 </div>
