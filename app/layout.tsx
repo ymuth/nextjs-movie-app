@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import NavBar from "@/components/ui/navbar";
 import { geistSans, geistMono } from "@/lib/fonts";
+import { FavouritesProvider } from "@/context/favcontext";
 
 
 
@@ -18,7 +19,9 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
     >
       <body className="min-h-full flex flex-col">
         <NavBar />
-        {children}
+        <FavouritesProvider>
+          {children}
+        </FavouritesProvider>
       </body>
     </html>
   );

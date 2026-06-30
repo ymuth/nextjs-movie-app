@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { bebasNeue } from "@/lib/fonts";
-import SearchBar from "../searchbar/searchbar";
+import SearchBar from "./searchbar";
 
 export default function NavBar() {
     return (
