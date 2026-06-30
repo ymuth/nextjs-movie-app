@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 type FavouritesContextType = {
     favourites: number[];
@@ -10,7 +10,16 @@ type FavouritesContextType = {
 export const FavouritesContext = createContext<FavouritesContextType | null>(null);
 
 export function FavouritesProvider({ children, }: { children: React.ReactNode }) {
-    const [favourites, setFavourites] = useState<number[]>([]);
+    const [favourites, setFavourites] = useState<number[]>(() => {
+        if (typeof window === "undefined") return [];
+
+        const stored = localStorage.getItem("favourites");
+        return stored ? JSON.parse(stored) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem("favourites", JSON.stringify(favourites));
+    }, [favourites]);
 
     function toggleFavourites(movieID: number) {
         setFavourites((prev) => {
