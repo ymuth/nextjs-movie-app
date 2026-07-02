@@ -6,20 +6,20 @@ import { FavouritesContext } from "@/context/favcontext";
 
 export default function FavouriteButton({ movieID }: { movieID: Movie["id"] }) {
 
-    {/* Delays rendering until server matches the client*/ }
+    {/* Gets Favourites and toggle function from the context */ }
+    const context = useContext(FavouritesContext);
     const [mounted, setMounted] = useState(false);
+    if (!context) return null;
+    
+    const { favourites, toggleFavourites } = context;
+    const isFavourite = favourites.includes(movieID);
+    
+    {/* Delays rendering until server matches the client*/ }
     useEffect(() => {
         setMounted(true);
     }, []);
     if (!mounted) return null; //  prevents hydration mismatch
-
-    {/* Gets Favourites and toggle function from the context */ }
-    const context = useContext(FavouritesContext);
-    if (!context) return null;
-
-    const { favourites, toggleFavourites } = context;
-    const isFavourite = favourites.includes(movieID);
-
+    
     {/* returns client side button which can toggle favourites */}
     return (
 
