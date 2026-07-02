@@ -25,7 +25,7 @@ export async function getSimilarMovies(movie_id: string) {
 }
 
 
-export async function getMovieId(movie_id: string) {
+export async function getMovieDetails(movie_id: string) {
     const movieDetailsURL = `https://api.themoviedb.org/3/movie/${movie_id}?api_key=${apiKey}`
     const res = await fetch(movieDetailsURL);
 

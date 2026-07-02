@@ -1,8 +1,9 @@
-import { getMovieId, getSimilarMovies } from "@/lib/api/movie";
+import { getMovieDetails, getSimilarMovies } from "@/lib/api/movie";
 import { notFound } from "next/navigation";
 import MovieRow from "@/components/movies/movierow";
 import Image from "next/image";
 import Backdrop from "@/components/movie/backdrop";
+import image404 from "@/public/images/Image404.png"
 
 type Genre = {
     name: string;
@@ -11,7 +12,7 @@ type Genre = {
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
     const { id } = await params;
-    const movie = await getMovieId(id);
+    const movie = await getMovieDetails(id);
     const genreList = (movie.genres ?? []).map((genre: Genre) => genre.name).join(", ")
     return {
         title: movie.title,
@@ -29,7 +30,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
     const { id } = await params;
     let movie;
     try {
-        movie = await getMovieId(id);
+        movie = await getMovieDetails(id);
     } catch (err) {
         notFound();
     }
@@ -68,10 +69,19 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                 </div>
 
                 <div className="relative w-full max-w-55 aspect-2/3 size-full ">
-                    {moviePosterPath &&
+                    {moviePosterPath ?
                         <Image
                             fill
                             src={moviePosterPath}
+                            alt={movie.title}
+                            loading="eager"
+                            sizes="(max-width: 768px) 100vw, 25vw"
+                            className="object-cover rounded-xl shadow-gray-700 shadow-md"
+                        />
+                        :
+                        <Image
+                            fill
+                            src={image404}
                             alt={movie.title}
                             loading="eager"
                             sizes="(max-width: 768px) 100vw, 25vw"
