@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project created with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## This Project (quick overview)
 
-First, run the development server:
+- A Next.js app that lists movies and supports favouriting.
+- Favourites are stored client-side as an array of movie IDs and synced to a cookie so the server can render a SEO-friendly favourites page without exposing the TMDB API key.
+
+## Requirements
+
+- Node 18+ (recommended)
+- A TMDB API key (see below)
+
+## Setup
+
+1. Install deps:
+
+```bash
+npm install
+```
+
+2. Create a local env file (do NOT commit this):
+
+Create a file named `.env.local` in the project root and add your TMDB API key:
+
+```
+TMDB_API_KEY=your_tmdb_api_key_here
+```
+
+Note: The app calls TMDB from the server (not the browser), so the key must remain secret. Do not prefix it with `NEXT_PUBLIC_`.
+
+3. Run the dev server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Build for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## How the favourites flow works (brief architecture)
 
-## Learn More
+- Client: `context/favcontext.tsx` stores `favourites` as a `number[]` (movie IDs) in `localStorage`. A `FavouriteButton` toggles IDs in that array.
+- Sync: The context also writes a `favourites` cookie (JSON-encoded IDs). This cookie is readable by the server during SSR.
+- Server: The favourites page (`app/favourites/page.tsx`) is a server component. It uses the helper `lib/api/favourites.ts` which reads the `favourites` cookie via `next/headers` and calls the TMDB API (using `process.env.TMDB_API_KEY`) to fetch full movie objects. The page then renders `MovieGrid` with `Movie[]`.
 
-To learn more about Next.js, take a look at the following resources:
+This keeps the TMDB key on the server, preserves SEO for the favourites page, and keeps client toggling responsive.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Resources
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- TMDB API docs: https://developers.themoviedb.org/3
+- Next.js docs: https://nextjs.org/docs
