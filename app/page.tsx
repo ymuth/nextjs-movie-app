@@ -26,7 +26,7 @@ export default async function Home() {
       <div className="z-0 fixed inset-0 bg-linear-to-b from-transparent to-[#1e1e1e]" />
 
       {/* Title and desc */}
-      <div className="relative z-10">
+      <div className="relative z-10 mb-50">
         <div className="flex flex-col text-center justify-center m-5 p-5" >
 
           <h1 className={`text-9xl font-semibold border-b ${bebasNeue.className}`}>MUGZ Movies</h1>

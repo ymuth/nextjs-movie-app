@@ -24,11 +24,17 @@ export default function FavouriteButton({ movieID }: { movieID: Movie["id"] }) {
     return (
 
         <div>
-            <button
+            {/* <button
                 onClick={() => toggleFavourites(movieID)}
                 className="absolute flex text-2xl top-0 right-0 z-20 m-2 p-2 justify-center items-center rounded-full bg-black/50 aspect-square h-9"
             >
                 {isFavourite ? "♥" : "♡"}
+            </button> */}
+            <button
+                onClick={() => toggleFavourites(movieID)}
+                className={`absolute flex text-2xl top-0 right-0 z-20 m-2 p-2 justify-center items-center rounded-full bg-black/50 aspect-square h-9 ${isFavourite && "text-red-500"}`}
+            >
+                ♥
             </button>
             {/* <p className="absolute flex top-0 right-0 z-20 m-2 p-2 justify-center items-center rounded-full bg-black/50 aspect-square h-8">♥</p> */}
         </div>

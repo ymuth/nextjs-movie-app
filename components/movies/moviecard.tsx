@@ -25,28 +25,22 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                 <Link href={moviePagePath}>
 
                     <div>
-                        {/* <img
-                        src={moviePosterPath}
-                        alt={movie.title}
-                        
-                        
-                        /> */}
                         {moviePosterPath ?
-                        <Image className="aspect-2/3"
-                            src={moviePosterPath}
-                            alt={movie.title}
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            width={500}
-                            height={750}
-                        />
-                        :
-                        <Image className="aspect-2/3"
-                            src={image404}
-                            alt={movie.title}
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                            width={500}
-                            height={750}
-                        />
+                            <Image className="aspect-2/3"
+                                src={moviePosterPath}
+                                alt={movie.title}
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                width={500}
+                                height={750}
+                            />
+                            :
+                            <Image className="aspect-2/3"
+                                src={image404}
+                                alt={movie.title}
+                                sizes="(max-width: 768px) 100vw, 50vw"
+                                width={500}
+                                height={750}
+                            />
                         }
                     </div>
 

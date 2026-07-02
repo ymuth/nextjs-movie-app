@@ -20,6 +20,7 @@ export default function SearchBar() {
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         placeholder="Search movies..."
+        className="border px-2 rounded-2xl"
       />
     </form>
   );

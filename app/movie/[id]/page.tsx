@@ -4,6 +4,7 @@ import MovieRow from "@/components/movies/movierow";
 import Image from "next/image";
 import Backdrop from "@/components/movie/backdrop";
 import image404 from "@/public/images/Image404.png"
+import FavouriteButton from "@/components/movies/favbutton";
 
 type Genre = {
     name: string;
@@ -69,6 +70,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                 </div>
 
                 <div className="relative w-full max-w-55 aspect-2/3 size-full ">
+                    <FavouriteButton movieID={movie.id} />
                     {moviePosterPath ?
                         <Image
                             fill
@@ -93,8 +95,8 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                 <div className="flex flex-col col-span-3 relative z-10 bg-black/50 rounded-xl shadow-gray-700 shadow-md size-full p-5 mr-10">
 
                     {/* <div> */}
-                    {movie.tagline && 
-                    <h3 className="italic  text-center mb-3">{movie.tagline}</h3>
+                    {movie.tagline &&
+                        <h3 className="italic  text-center mb-3">{movie.tagline}</h3>
                     }
                     <h3 className="font-semibold">{movie.overview}</h3>
                     {/* </div> */}
