@@ -5,6 +5,11 @@ This is a [Next.js](https://nextjs.org) project created with [`create-next-app`]
 - A Next.js app that lists movies and supports favouriting.
 - Favourites are stored client-side as an array of movie IDs and synced to a cookie so the server can render a SEO-friendly favourites page without exposing the TMDB API key.
 
+Tech Stack:
+- React
+- NextJS
+- Used Type Script and TailWindCSS for swift development and production.
+
 ## Requirements
 
 - Node 18+ (recommended)
