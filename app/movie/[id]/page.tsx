@@ -69,7 +69,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                     <h4 className="text-xl">{movie.release_date.split('-')[0]}</h4>
                 </div>
 
-                <div className="relative w-full max-w-55 aspect-2/3 size-full ">
+                <div className="relative w-full max-w-55 md:col-span-1 col-span-4 aspect-2/3 size-full ">
                     <FavouriteButton movieID={movie.id} />
                     {moviePosterPath ?
                         <Image
@@ -92,7 +92,7 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                     }
                 </div>
 
-                <div className="flex flex-col col-span-3 relative z-10 bg-black/50 rounded-xl shadow-gray-700 shadow-md size-full p-5 mr-10">
+                <div className="flex flex-col col-span-4 md:col-span-3 relative z-10 bg-black/50 rounded-xl shadow-gray-700 shadow-md size-full p-5 md:mr-10">
 
                     {/* <div> */}
                     {movie.tagline &&
