@@ -64,10 +64,11 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
             {/* contents: title, image, description */}
             <div className="grid grid-cols-4 justify-items-center p-5 gap-8 mb-10">
 
-                <div className=" text-center  col-span-4  relative z-10 p-3 pb-0 mb-2 bg-black/50 rounded-md">
+                <div className=" text-center  col-span-4  relative z-10 p-3 mb-2 bg-black/50 rounded-md">
                     <h1 className="text-5xl font-semibold">{movie.title}</h1>
                     <h4 className="text-xl">{movie.release_date.split('-')[0]}</h4>
                 </div>
+
 
                 <div className="relative w-full max-w-55 md:col-span-1 col-span-4 aspect-2/3 size-full ">
                     <FavouriteButton movieID={movie.id} />
@@ -92,7 +93,8 @@ export default async function MovieIdPage({ params }: { params: { id: string } }
                     }
                 </div>
 
-                <div className="flex flex-col col-span-4 md:col-span-3 relative z-10 bg-black/50 rounded-xl shadow-gray-700 shadow-md size-full p-5 md:mr-10">
+
+                <div className="flex flex-col col-span-4 md:col-span-3 relative z-10 bg-black/50 rounded-xl shadow-gray-700 shadow-md size-full gap-4 p-5 md:mr-10">
 
                     {/* <div> */}
                     {movie.tagline &&
